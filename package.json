@@ -1,0 +1,24 @@
+{
+  "name": "auther",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "nodemon --watch server",
+    "seed": "node seed"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "^2.10.2",
+    "express": "^4.13.3",
+    "lodash": "^3.10.1",
+    "mongoose": "^4.1.10",
+    "morgan": "^1.6.1",
+    "shortid": "^2.2.2"
+  },
+  "devDependencies": {
+    "chance": "^0.8.0",
+    "nodemon": "^1.7.1"
+  }
+}
