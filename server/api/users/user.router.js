@@ -25,7 +25,6 @@ router.get('/', function (req, res, next) {
 });
 
 router.post('/', function (req, res, next) {
-	console.log('signup route hit')
 	User.create(req.body)
 	.then(function (user) {
 		res.status(201).json(user);
@@ -36,12 +35,18 @@ router.post('/', function (req, res, next) {
 router.put("/login/", function(req, res, next){
 	User.findOne({email: req.body.email}).exec().then(function(user){
 		if (user && (user.password === req.body.password)){
+			req.session.userId = user._id;
 			res.status(200).json(user);
 		}
 		else {
 			res.status(401).json();
 		}
 	}).then(null, next);
+})
+
+router.get('/logout', function (req, res, next) {
+	delete req.session.userId;
+	res.status(200).end();
 })
 
 router.get('/:id', function (req, res, next) {
