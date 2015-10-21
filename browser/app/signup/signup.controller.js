@@ -1,7 +1,6 @@
 app.controller("signup", function($scope, Auth, $state){
-	// $scope.logOurCredentials = function(){
-	// 	console.log($scope.credentials)
-	// }
+	$scope.currentUser = Auth.getCurrentUser();
+	if ($scope.currentUser) $state.go('home');
 
 	$scope.signup = function(credentials){
 		Auth.signup(credentials).then(function(user){

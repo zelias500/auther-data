@@ -5,3 +5,10 @@
   border: 1px dotted #777; }
   .story-container p {
     margin: 20px 0; }
+
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-indent: 1px;
+    text-overflow: '';
+}

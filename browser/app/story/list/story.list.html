@@ -39,7 +39,7 @@
 					<a ui-sref="user({id: story.author._id})">{{ story.author.name }}</a>
 				</li>
 			</ul>
-			<button class="btn btn-default btn-xs" ng-click="removeStory(story)">
+			<button class="btn btn-default btn-xs" ng-show="canEdit('_id',story.author) " ng-click="removeStory(story)">
 				<span class="glyphicon glyphicon-remove"></span>
 			</button>
 		</li>

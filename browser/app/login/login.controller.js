@@ -1,7 +1,6 @@
 app.controller("login", function($scope, Auth, $state){
-	// $scope.logOurCredentials = function(){
-	// 	console.log($scope.credentials)
-	// }
+	$scope.currentUser = Auth.getCurrentUser();
+	if ($scope.currentUser) $state.go('home');
 
 	$scope.login = function(credentials){
 		Auth.login(credentials).then(function(user){

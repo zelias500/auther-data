@@ -32,6 +32,13 @@ router.post('/', function (req, res, next) {
 	.then(null, next);
 });
 
+router.get("/login/", function(req, res, next){
+	User.findById(req.session.userId).exec()
+	.then(function(currentUser){
+		res.json(currentUser);
+	})
+});
+
 router.put("/login/", function(req, res, next){
 	User.findOne({email: req.body.email}).exec().then(function(user){
 		if (user && (user.password === req.body.password)){

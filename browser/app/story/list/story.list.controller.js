@@ -1,6 +1,8 @@
 'use strict';
 
-app.controller('StoryListCtrl', function ($scope, stories, Story, users) {
+app.controller('StoryListCtrl', function ($scope, stories, Story, users, Auth) {
+	$scope.canEdit = Auth.canEdit
+
 	$scope.stories = stories;
 	$scope.users = users;
 
