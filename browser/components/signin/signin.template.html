@@ -1,6 +1,6 @@
-<!-- <div class="signin-container">
+<div class="signin-container">
 	<div class="buffer local">
-		<form name="loginForm" ng-submit="login(credentials)">
+		<form name="signupForm" ng-submit="method(credentials)">
 			<div class="form-group">
 				<label>email</label>
 				<input type="text" class="form-control" ng-model="credentials.email" required />
@@ -9,7 +9,7 @@
 				<label>password</label>
 				<input type="password" class="form-control" ng-model="credentials.password" required />
 			</div>
-			<button type="submit" class="btn btn-block btn-primary">login</button>
+			<button type="submit" class="btn btn-block btn-primary">{{name}}</button>
 		</form>
 	</div>
 	<div class="or buffer">
@@ -20,6 +20,4 @@
 		<p><oauth-button provider-name="Twitter"></oauth-button></p>
 		<p><oauth-button provider-name="GitHub"></oauth-button></p>
 	</div>
-</div> -->
-
-<sign-in method="login" name="login"></sign-in>
+</div>

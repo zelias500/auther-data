@@ -25,12 +25,24 @@ router.get('/', function (req, res, next) {
 });
 
 router.post('/', function (req, res, next) {
+	console.log('signup route hit')
 	User.create(req.body)
 	.then(function (user) {
 		res.status(201).json(user);
 	})
 	.then(null, next);
 });
+
+router.put("/login/", function(req, res, next){
+	User.findOne({email: req.body.email}).exec().then(function(user){
+		if (user && (user.password === req.body.password)){
+			res.status(200).json(user);
+		}
+		else {
+			res.status(401).json();
+		}
+	}).then(null, next);
+})
 
 router.get('/:id', function (req, res, next) {
 	req.requestedUser.getStories()
