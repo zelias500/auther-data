@@ -29,6 +29,7 @@ passport.use(
         		if (!user) {
         			return User.create({
         				email: profile.emails[0].value,
+                        name: profile.displayName,
                         google: {
                             id: profile.id,
                             name: profile.displayName,
@@ -39,34 +40,33 @@ passport.use(
         		}
         	})
             .then(function (user) {
-                console.log('-=-= final user: ', user, ' -=-=-=');
+                console.log('-=-= user passed to done: ', user, ' -=-=-=');
                 done(null, user);
             });
     })
 );
 
 passport.serializeUser(function (user, done){
+    console.log('serializeUser')
+    console.log(user)
+    console.log(user._id)
     done(null, user._id)
 })
 
 passport.deserializeUser(function(id, done){
+    console.log('deserializeUser');
+    console.log(id);
     User.findById(id).exec().then(function(user){
-        done(user);
+        done(null, user);
     })
 })
 
 /* * * * * */
-
-
-
-
 app.use(require('./logging.middleware'));
 
 app.use(require('./requestState.middleware'));
 
 app.use(require('./statics.middleware'));
-
-app.use('/api', require('../api/api.router'));
 
 //google authentication and login 
 app.get('/auth/google', passport.authenticate('google', { scope : 'email' }));
@@ -74,16 +74,20 @@ app.get('/auth/google', passport.authenticate('google', { scope : 'email' }));
 // handle the callback after google has authenticated the user
 app.get('/auth/google/callback',
   passport.authenticate('google', {
-    successRedirect : '/home',
+    successRedirect : 'http://0.0.0.0:8080/',
     failureRedirect : '/stories'
   }));
+
+
+app.use('/api', require('../api/api.router'));
 
 var validFrontendRoutes = ['/', '/stories', '/users', '/stories/:id', '/users/:id', '/signup', '/login'];
 var indexPath = path.join(__dirname, '..', '..', 'public', 'index.html');
 validFrontendRoutes.forEach(function (stateRoute) {
-	app.get(stateRoute, function (req, res) {
-		res.sendFile(indexPath);
-	});
+    app.get(stateRoute, function (req, res) {
+        console.log('About to res.sendFile(indexPath)')
+        res.sendFile(indexPath);
+    });
 });
 
 app.use(require('./error.middleware'));
