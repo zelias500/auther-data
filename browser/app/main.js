@@ -10,5 +10,8 @@ app.run(function($http, Auth){
 
 app.config(function ($urlRouterProvider, $locationProvider) {
 	$locationProvider.html5Mode(true);
+	$urlRouterProvider.when('/auth/:provider', function () {
+		window.location.reload();
+	});
 	$urlRouterProvider.otherwise('/');
 });
