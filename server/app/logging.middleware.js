@@ -4,8 +4,9 @@ var router = require('express').Router(),
 	morgan = require('morgan');
 
 router.use(function (req, res, next) {
-	if (!req.session.userId) console.log('Not logged in');
-	else console.log('UserId: ', req.session.userId);
+	console.log(req.user);
+	// if (!req.session.userId) console.log('Not logged in');
+	// else console.log('UserId: ', req.session.userId);
   	next();
 });
 

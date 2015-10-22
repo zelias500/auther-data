@@ -42,11 +42,22 @@ passport.use(
                 console.log('-=-= final user: ', user, ' -=-=-=');
                 done(null, user);
             });
-        //console.log('---', 'in verification callback', profile, '---');
     })
 );
 
+passport.serializeUser(function (user, done){
+    done(null, user._id)
+})
+
+passport.deserializeUser(function(id, done){
+    User.findById(id).exec().then(function(user){
+        done(user);
+    })
+})
+
 /* * * * * */
+
+
 
 
 app.use(require('./logging.middleware'));
